@@ -45,7 +45,7 @@ where
     T: AddAssign + Copy + Default
 {
     for ii in seq_up(i, fenwick.len()) {
-        fenwick[ii] += delta;
+        unsafe { *fenwick.get_unchecked_mut(ii) += delta; }
     }
 }
 
@@ -68,7 +68,7 @@ where
 {
     let mut sum = T::default();
     for ii in seq_dn(i) {
-        sum += fenwick[ii];
+        unsafe { sum += *fenwick.get_unchecked(ii); }
     }
     sum
 }
